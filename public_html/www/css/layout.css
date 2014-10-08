@@ -1,0 +1,143 @@
+/* 
+    Created on : 8.10.2014, 16:51:11
+    Author     : Petr Kukrál <p.kukral@kukral.eu>
+*/
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+.clear{
+	clear: both;
+}
+
+section.main {
+	margin: 0 auto;
+	width: 900px;
+}
+
+body {
+	font-family: Tahoma, Geneva, Verdana, sans, sans-serif, Arial;
+	background-image: url("../img/layout/header-back.png");
+	background-repeat: repeat-x;
+}
+
+header{
+	height: 92px;
+	margin: 0 auto;
+	width: 900px;
+}
+header a:hover {
+	text-decoration: none;
+}
+header h1 {
+	color: white;
+	padding: 0;
+	margin: 0;
+}
+header span {
+	color: white;
+	margin-top: 5px;
+}
+
+.logo-kiv, .logo-zcu {
+	display: inline-block;
+	margin-left: 50px;
+}
+
+.logo-students {
+	padding-top: 10px;
+	display: inline-block;
+}
+
+nav {
+	width: 160px;
+	padding: 45px 10px 15px 30px;
+}
+nav a {
+	display: block;
+	color:#012E61;
+	text-decoration: none;
+	background-image: url(../img/layout/bullet.gif);
+	background-repeat: no-repeat;
+	background-position: 3px 0.9em;
+	padding: 6px 0 6px 10px;
+	border-top: 1px solid #d5d5d5;
+	font-size: 10pt;
+}
+nav a:hover {
+	text-decoration: underline;
+}
+nav a.selected {
+	color:black;
+}
+.left-side {
+	float: left;
+	width: 200px;
+}
+.right-side {
+	float: left;
+	width: 660px;
+}
+article {
+	padding: 25px 0 10px 20px;
+	font-size: 10pt;
+	font-family: Helvetica, Helvetica CE, Arial, Arial CE, sans-serif;
+	color: #1F1D1D;
+	text-align: justify;
+}
+article h1 {
+	font-family: inherit;
+	font-weight: 500;
+	line-height: 1.1;
+	color: inherit;
+	font-size: 18px;
+	color: #012E61;
+}
+article a {
+	text-decoration: underline;
+}
+
+article a:hover {
+	color: #012E61;
+}
+
+.link-bar {
+	margin-left: 15px;
+}
+
+.link-bar a {
+	display: block;
+	color: #012E61;
+	font-size: 10pt;
+	margin-left: 12px;
+}
+h4 {
+	font-family: inherit;
+	font-weight: 500;
+	line-height: 1.1;
+	font-size: 18px;
+	color: #012E61;
+	margin-left: 15px;
+	margin-bottom: 10px;
+}
+
+.files {
+	padding: 10px 0 50px 20px;
+	width: 660px;
+}
+.files h4 {
+	margin-left: 0;
+}
+.files a {
+	display: block;
+	color: #012E61;
+	font-size: 10pt;
+	margin-left: 12px;
+}
+
+
