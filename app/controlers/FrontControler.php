@@ -18,6 +18,7 @@ class FrontControler {
 	}
 
 	public function render() {
+		$this->template->tittle = "Web pro studenty";
 		$this->template->render();
 	}
 
