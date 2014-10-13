@@ -74,7 +74,7 @@ and open the template in the editor.
 						phpMyAdmin<br />
 						phpPGAdmin<br />
 						<br />
-						Fakulta aplikovaných věd ZČU pořádá každoročně Den otevřených dveří, kde se můžete seznámit s prostředím fakulty a jednotlivých kateder, s jejich pracovníky a studenty, dozvědět se bližší informace o studijních programech a přijímacím řízení, příp. vznést další doplňující dotazy. 
+						Fakulta aplikovaných věd ZČU pořádá každoročně Den otevřených dveří, kde se můžete seznámit s prostředím fakulty a jednotlivých kateder, s jejich pracovníky a studenty, dozvědět se bližší informace o studijních programech a přijímacím řízení, příp. vznést další doplňující dotazy.
 					</p>
 				</article>
 				<section class="files">
@@ -87,3 +87,4 @@ and open the template in the editor.
 		</section>
 	</body>
 </html>
+
