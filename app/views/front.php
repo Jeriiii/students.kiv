@@ -6,10 +6,10 @@ and open the template in the editor.
 -->
 <html>
 	<head>
-		<title><?php echo $tittle ?></title>
+		<title><?php echo $tittle . " - " . $page->name ?></title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/layout.css"/>
+		<link rel="stylesheet" href="<?php echo $basePath ?>/css/layout.css"/>
 		<!--[if lt IE 9]>
             <script src="/js/html5shiv.js"></script>
         <![endif]-->
@@ -30,60 +30,45 @@ and open the template in the editor.
 		<section class="main">
 			<div class="left-side">
 				<nav>
-					<a>neco</a>
-					<a>neco jineho</a>
-					<a>neco </a>
-					<a>neco </a>
-					<a>neco </a>
-					<a>neco jineho</a>
-					<a>neco jineho</a>
-					<a>neco jineho</a>
+					<?php
+					foreach ($pages as $pg) {
+						echo "<a href='$basePath/$pg->name'>";
+						echo $pg->name;
+						echo "</a>";
+					}
+					?>
 				</nav>
 				<h4>Užitečné odkazy</h4>
 				<div class="link-bar">
-					<a>link 1</a>
-					<a>hodne dlouhz link 2</a>
-					<a>link 3 </a>
-					<a>link 4 </a>
+					<?php
+					foreach ($links as $link) {
+						echo "<a href='$link->url'>";
+						echo $link->name;
+						echo "</a>";
+					}
+					?>
 				</div>
 			</div>
 			<div class="right-side">
 				<article>
-					<h1>Nazev stranky</h1>
-					<p>
-						neco
-						neco necojineho <br />
-						a neco <br /> <a>Odkaz</a> <br />
-						Server students.kiv.zcu.cz poskytuje studentům Katedry informatiky a výpočetní techniky, Západočeské univerzity v Plzni níže uvedené služby a slouží jako rozcestník užitečný při zpracování studijních úkolů.
-						<br />
-						data uložena na distribuovaném souborovém systému AFS a přístupná ze všech laboratoří stejně jako z konta na tomto serveru<br />
-						SVN, CVS<br />
-						PHP5 + Apache 2<br />
-						MySQL, PostgreSQL, Oracle<br />
-						Java + Tomcat<br />
-						PVM, MPI<br />
-						SSH - UNIX terminál - bash, gcc, java, python, perl<br />
-						Flyspray<br />
-						PHPMyAdmin<br />
-						Pro detaily o existujících službách se podívejte na Support KIV<br />
-						<br />
-						Na závěr odkazy na nejčastěji využívané služby:<br />
-						<br />
-						FlySpray<br />
-						KIV Výuka<br />
-						phpMyAdmin<br />
-						phpPGAdmin<br />
-						<br />
-						Fakulta aplikovaných věd ZČU pořádá každoročně Den otevřených dveří, kde se můžete seznámit s prostředím fakulty a jednotlivých kateder, s jejich pracovníky a studenty, dozvědět se bližší informace o studijních programech a přijímacím řízení, příp. vznést další doplňující dotazy.
-					</p>
+					<h1><?php echo $page->name ?></h1>
+					<?php echo $page->content ?>
+					<?php if ($page->form) include 'forms/contactForm.php'; ?>
 				</article>
 				<section class="files">
-					<h4>Soubory:</h4>
-					<a>soubor 1</a>
-					<a>soubor 2</a>
+					<?php
+					if (!empty($files)) {
+						echo "<h4>Soubory:</h4>";
+					}
+					foreach ($files as $file) {
+						echo "<a href='$basePath/files/$file->id.$file->suffix'>";
+						echo $file->name;
+						echo "</a>";
+					}
+					?>
 				</section>
 			</div>
-			<div class="clear"></div>
+			<div class = "clear"></div>
 		</section>
 	</body>
 </html>

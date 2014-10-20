@@ -10,11 +10,15 @@ class Template {
 	/** @var string Název templaty */
 	private $viewName;
 
+	/** @var string Relativní cesta do adresáře WWW */
+	public $basePath;
+
 	/** @var array Proměnné templaty */
 	private $vars = array();
 
-	public function __construct($viewName) {
+	public function __construct($viewName, $basePath) {
 		$this->viewName = $viewName;
+		$this->basePath = $basePath;
 	}
 
 	/**
@@ -38,6 +42,8 @@ class Template {
 		foreach ($this->vars as $key => $value) {
 			$$key = $value;
 		}
+		//Načítání proměnné basePath
+		$basePath = $this->basePath;
 
 		include ($path);
 	}

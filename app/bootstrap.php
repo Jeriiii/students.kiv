@@ -1,14 +1,18 @@
 <?php
 
-require_once APP_DIR . '/controlers/FrontControler.php';
-require_once APP_DIR . '/application/Application.php';
-require_once APP_DIR . '/application/Route.php';
-require_once APP_DIR . '/application/Container.php';
+require_once APP_DIR . '/controlers/front_controler.class.php';
+require_once APP_DIR . '/application/application.class.php';
+require_once APP_DIR . '/application/route.class.php';
+require_once APP_DIR . '/application/container.class.php';
+require_once APP_DIR . '/application/connection.class.php';
 
 $container = new Container();
 
-// TODO - zatím je adresa na tvrdo
-$container->url = "http://students.kiv.zcu.cz/neco";
+// načítání url
+$container->url = array_key_exists("q", $_GET) ? $_GET["q"] : "/";
+
+$connection = new Connection("mysql", "localhost", "students_kiv", "root", "root");
+$container->connection = $connection;
 
 $container->addRoute(new Route("/admin/", "AdminControler"));
 $container->addRoute(new Route("/", "FrontControler")); //když nespadne nikam jinam

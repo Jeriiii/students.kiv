@@ -13,6 +13,9 @@ class Route {
 	/** @var string Název kontroleru, který se má zavolat. */
 	private $controlerName;
 
+	/** @var string Název stránky - plní se až při procházení rout v routeru */
+	private $pageName = null;
+
 	public function __construct($url, $controlerName) {
 		$this->url = $url;
 		$this->controlerName = $controlerName;
@@ -24,6 +27,17 @@ class Route {
 
 	public function getControlerName() {
 		return $this->controlerName;
+	}
+
+	public function setPageName($pageName) {
+		if ($pageName == "/") { //na homepage se stává, že se dá do názvu lomítko
+			$pageName = "";
+		}
+		$this->pageName = $pageName;
+	}
+
+	public function getPageName() {
+		return $this->pageName;
 	}
 
 }
