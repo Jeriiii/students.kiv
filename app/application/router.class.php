@@ -10,6 +10,9 @@ class Router {
 	/** @var array Registrované routy. */
 	private $routes = array();
 
+	/** @var Route Aktuální používaná routa */
+	private $route = null;
+
 	/** @var Url Aktuální url */
 	private $url;
 
@@ -24,11 +27,16 @@ class Router {
 	 * @throws Exception Controler nenalezen
 	 */
 	public function getRoute() {
+		if (isset($this->route)) {
+			return $this->route;
+		}
+
 		foreach ($this->routes as $route) {
 			$path = "/" . $this->url->path; // přidání lomítka aby souhlasilo s názvem rout
 			// pokud url obsahuje značku z routy
 			if (strpos($path, $route->getUrl()) !== false) {
 				$route->setPageName($this->url->path);
+				$this->route = $route;
 				return $route;
 			}
 		}

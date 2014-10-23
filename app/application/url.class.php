@@ -1,5 +1,7 @@
 <?php
 
+require_once 'query.class.php';
+
 /**
  * Parsuje url
  *
@@ -29,10 +31,20 @@ class Url {
 
 		$path = array_key_exists("path", $parseUrl) ? $parseUrl["path"] : "";
 		$this->path = $path;
+
+		$this->parseQuery($_GET);
+	}
+
+	/**
+	 * Uloží všechny get parametry s vyjímkou vyhrazeného q
+	 * @param array $queries Paramerty
+	 */
+	private function parseQuery($queries) {
 		/* parsování query */
-		foreach ($_GET as $key => $param) {
+		$this->query = new Query();
+		foreach ($queries as $key => $param) {
 			if ($key != "q") { // vyhrazené pro path stránky
-				$this->query[$key] = $param;
+				$this->query->$key = $param;
 			}
 		}
 	}

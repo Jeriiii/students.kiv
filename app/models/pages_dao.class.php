@@ -14,6 +14,7 @@ class PagesDao extends AbstractDao {
 	/* columns */
 	const COLUMN_ID = "id";
 	const COLUMN_NAME = "name";
+	const COLUMN_URL = "url";
 
 	public function getTableName() {
 		return self::TABLE_NAME;
@@ -27,6 +28,17 @@ class PagesDao extends AbstractDao {
 	public function findByName($name) {
 		$query = "SELECT * FROM " . self::TABLE_NAME . " WHERE " . self::COLUMN_NAME . " = ?";
 		$stmt = $this->database->query($query, $name);
+		return $stmt->fetch(PDO::FETCH_OBJ);
+	}
+
+	/**
+	 * Najde stránku podle její url.
+	 * @param string $url Jméno url.
+	 * @return PDOStatement|boolean Jedna stránka.
+	 */
+	public function findByUrl($url) {
+		$query = "SELECT * FROM " . self::TABLE_NAME . " WHERE " . self::COLUMN_URL . " = ?";
+		$stmt = $this->database->query($query, $url);
 		return $stmt->fetch(PDO::FETCH_OBJ);
 	}
 

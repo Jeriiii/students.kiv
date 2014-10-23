@@ -1,32 +1,16 @@
 <?php
 
+require_once 'box.class.php';
+
 /**
  * Slouží k přenášení hodnot mezi třídami
  *
  * @author Petr Kukrál <p.kukral@kukral.eu>
  */
-class Container {
+class Container extends Box {
 
 	/** @var array Zaznamenané routy */
 	private $routes = array();
-
-	/** @var array Proměnné kontaineru. */
-	private $vars = array();
-
-	/**
-	 * @param string $name Název proměnné.
-	 * @param mixed $value Hodnota proměnné.
-	 */
-	public function __set($name, $value) {
-		$this->vars[$name] = $value;
-	}
-
-	/**
-	 * @param string $name Název proměnné.
-	 */
-	public function __get($name) {
-		return $this->vars[$name];
-	}
 
 	/**
 	 * Přidá další routu

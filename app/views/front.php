@@ -32,7 +32,7 @@ and open the template in the editor.
 				<nav>
 					<?php
 					foreach ($pages as $pg) {
-						echo "<a href='$basePath/$pg->name'>";
+						echo "<a href='$basePath/$pg->url'>";
 						echo $pg->name;
 						echo "</a>";
 					}

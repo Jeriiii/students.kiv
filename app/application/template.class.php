@@ -16,9 +16,13 @@ class Template {
 	/** @var array Proměnné templaty */
 	private $vars = array();
 
-	public function __construct($viewName, $basePath) {
+	/** @var Messages Zprávy pro uživatele. */
+	private $messages;
+
+	public function __construct($viewName, $basePath, Messages $messages) {
 		$this->viewName = $viewName;
 		$this->basePath = $basePath;
+		$this->messages = $messages;
 	}
 
 	/**
@@ -44,6 +48,8 @@ class Template {
 		}
 		//Načítání proměnné basePath
 		$basePath = $this->basePath;
+		//Načítání zpráv pro uživatele
+		$messages = $this->messages;
 
 		include ($path);
 	}

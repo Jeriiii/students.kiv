@@ -17,5 +17,7 @@ $container->connection = $connection;
 $container->addRoute(new Route("/admin/", "AdminControler"));
 $container->addRoute(new Route("/", "FrontControler")); //když nespadne nikam jinam
 
+session_start();
+
 $application = new Application($container);
 $application->run();
