@@ -5,13 +5,14 @@ require_once APP_DIR . '/application/application.class.php';
 require_once APP_DIR . '/application/route.class.php';
 require_once APP_DIR . '/application/container.class.php';
 require_once APP_DIR . '/application/connection.class.php';
+require_once APP_DIR . '/config/config.php';
 
 $container = new Container();
 
 // načítání url
 $container->url = array_key_exists("q", $_GET) ? $_GET["q"] : "/";
 
-$connection = new Connection("mysql", "localhost", "students_kiv", "root", "root");
+$connection = new Connection($driver, $host, $dbname, $user, $password);
 $container->connection = $connection;
 
 $container->addRoute(new Route("/admin/", "AdminControler"));

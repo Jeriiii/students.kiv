@@ -38,10 +38,8 @@ class FrontControler extends BaseControler {
 			}
 		}
 		if (FALSE && $this->page->form) { // zatím to nebude fungovat, spustí se to až na serveru
-			if (!pam_auth($username, $password, $error)) {
-				if (!empty($error)) { // nepřihlášený uživatel
-					$this->redirect("FrontControler");
-				}
+			if (!$this->isUserLoggedIn()) {
+				//TO DO přesměruje na přilašovací formulář
 			}
 		}
 		$this->pages = $pagesDao->getAll();
