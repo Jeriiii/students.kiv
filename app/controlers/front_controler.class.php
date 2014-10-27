@@ -22,10 +22,6 @@ class FrontControler extends BaseControler {
 	private $links;
 
 	public function action($pageName) {
-		if ($this->query->do && $this->query->do == "submit-form") {
-			$this->submitContactForm();
-		}
-
 		$pagesDao = $this->createPagesDao();
 		$this->page = $pagesDao->findByUrl($pageName);
 		if (!$this->page) {
@@ -63,9 +59,16 @@ class FrontControler extends BaseControler {
 	}
 
 	/**
+	 * Odchytí odeslání přihlašovacího formuláře.
+	 */
+	public function submitSigninForm() {
+		die("odchycení odeslání formuláře");
+	}
+
+	/**
 	 * Metoda co se postará o zpracování odeslaného kontaktního formuláře.
 	 */
-	private function submitContactForm() {
+	public function submitContactForm() {
 		if ($this->postParam->note) {
 			$to = "to@email.com";
 			$from = "from@email.com";

@@ -41,6 +41,9 @@ class Application {
 		$url = $this->container->url;
 		$controler = new $controlName($postParam, $url->query, $messages, $database, $templateName, $url->basePath, $container->router);
 		$controler->action($pageName);
+
+		$controler->checkSubmitForm();
+		die();
 		$controler->render($pageName);
 	}
 

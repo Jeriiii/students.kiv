@@ -86,4 +86,19 @@ class Controler {
 		return $location;
 	}
 
+	/**
+	 * Zkontroluje, zda byl odeslán formulář. Pokud ano, pokusí se zavolat obslužnou metodu.
+	 * @throws Exception Pokud metoda neexistuje, nahlásí chybu.
+	 */
+	public function checkSubmitForm() {
+		if ($this->query->do == "submit-form") {
+			$submitFormMethod = "submit" . ucfirst($this->query->form);
+			if (method_exists($this, $submitFormMethod)) {
+				call_user_method($submitFormMethod, $this);
+			} else {
+				throw new Exception("Method $submitFormMethod not exist.");
+			}
+		}
+	}
+
 }
