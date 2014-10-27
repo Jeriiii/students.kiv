@@ -30,14 +30,15 @@ class Controler {
 	/** @var Messages Zprávy co se mají zobrazit příjemci */
 	public $messages;
 
-	public function __construct(PostParam $postParam, Query $query, Messages $messages, Database $database, $templateName, $basePath, $router) {
-		$this->messages = $messages;
-		$this->postParam = $postParam;
-		$this->query = $query;
-		$this->database = $database;
-		$this->router = $router;
-		$this->basePath = $basePath;
-		$this->template = new Template($templateName, $basePath, $messages);
+	public function __construct(Container $container, $templateName) {
+
+		$this->messages = $container->messages;
+		$this->postParam = $container->postParam;
+		$this->query = $container->url->query;
+		$this->database = $container->database;
+		$this->router = $container->router;
+		$this->basePath = $container->url->basePath;
+		$this->template = new Template($templateName, $this->basePath, $this->messages);
 	}
 
 	/**

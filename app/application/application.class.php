@@ -29,17 +29,11 @@ class Application {
 
 		$container = $this->container;
 
-		$route = $container->router->getRoute();
-		$postParam = $this->getPostParam($_POST);
-		$messages = new Messages();
-
-		$controlName = $route->getControlerName();
-		$pageName = $route->getPageName();
+		$controlName = $container->route->getControlerName();
+		$pageName = $container->route->getPageName();
 		$templateName = lcfirst(str_replace("Controler", "", $controlName));
 
-		$database = new Database($this->container->connection);
-		$url = $this->container->url;
-		$controler = new $controlName($postParam, $url->query, $messages, $database, $templateName, $url->basePath, $container->router);
+		$controler = new $controlName($container, $templateName);
 		$controler->action($pageName);
 
 		$controler->checkSubmitForm();
@@ -55,6 +49,10 @@ class Application {
 
 		$container->url = new Url($container->url);
 		$container->router = new Router($container->getRoutes(), $this->container->url);
+		$container->messages = new Messages();
+		$container->postParam = $this->getPostParam($_POST);
+		$container->route = $container->router->getRoute();
+		$container->database = new Database($container->connection);
 	}
 
 	/**

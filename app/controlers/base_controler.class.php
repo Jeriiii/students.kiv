@@ -24,4 +24,17 @@ class BaseControler extends Controler {
 		return new LinksDao($this->database);
 	}
 
+	/**
+	 * Zjistí, zda je uživatel přihlášen.
+	 */
+	public function isUserLoggedIn() {
+		if (!pam_auth($username, $password, $error)) {
+			if (!empty($error)) { // nepřihlášený uživatel
+				return FALSE;
+			}
+		}
+
+		return TRUE;
+	}
+
 }
