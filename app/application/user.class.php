@@ -20,7 +20,7 @@ class User {
 	 * @param boolean $isAdmin TRUE = Je uživatel adminem, jinak FALSE.
 	 */
 	public function signIn($userName, $isAdmin = FALSE) {
-		$this->session->userName = $userName;
+		$this->session->uname = $userName;
 		$this->session->isUserAdmin = $isAdmin;
 	}
 
@@ -28,7 +28,7 @@ class User {
 	 * Odhlásí uživatele z aplikace
 	 */
 	public function signOut() {
-		$this->session->userName = null;
+		$this->session->uname = null;
 	}
 
 	/**
@@ -36,11 +36,18 @@ class User {
 	 * @return boolean TRUE - uživatel je přihlášen, jinak FALSE
 	 */
 	public function isLoggedIn() {
-		if (isset($this->session->userName)) {
+		if (is_string($this->session->uname)) {
 			return TRUE;
 		}
-
 		return FALSE;
+	}
+
+	/**
+	 * Je uživatel admin?
+	 * @return boolean TRUE = uživatel je adminem
+	 */
+	public function isAdmin() {
+		return $this->session->isUserAdmin;
 	}
 
 }

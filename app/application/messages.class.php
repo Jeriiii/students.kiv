@@ -8,27 +8,40 @@
 class Messages {
 
 	/**
-	 * @var array Zprávy pro uživatele
+	 * @var Session Sečna
 	 */
-	public $messages;
+	private $session;
 
-	public function __construct() {
-		//TO DO - dodělat načítání ze sečny;
+	public function __construct(Session $session) {
+		$this->session = $session;
+		$messages = $this->session->messages;
+		if (empty($messages) && !is_array($messages)) {
+			$this->session->messages = array();
+		}
 	}
 
 	/**
 	 * Přidá další zprávu do zpráv.
-	 * @param string $message Zpráva.
+	 * @param string $messages Zpráva.
 	 */
-	public function addMessage($message) {
-		$this->messages[] = $message;
+	public function addMessage($messages) {
+		$this->session->messages = $this->session->messages + array($messages);
 	}
 
 	/**
-	 * Vrátí a smaže všechny zprávy.
+	 * Vrátí všechny zprávy.
+	 * @return array Zprávy pro uživatele.
 	 */
-	public function getMessages() {
-		//TO DO
+	public function getAll() {
+		return $this->session->messages;
+	}
+
+	/**
+	 * SMAŽE všechny zprávy.
+	 * @return array Zprávy pro uživatele.
+	 */
+	public function clear() {
+		$this->session->messages = array();
 	}
 
 }

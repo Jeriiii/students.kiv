@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
 	<head>
 		<title><?php echo $tittle . " - " . $page->name ?></title>
@@ -50,26 +45,30 @@ and open the template in the editor.
 				</div>
 			</div>
 			<div class="right-side">
-				<article>
-					<h1><?php echo $page->name ?></h1>
-					<?php echo $page->content ?>
-					<?php if ($page->form) include 'forms/contactForm.php'; ?>
-				</article>
-				<section class="files">
+				<div id="messages">
 					<?php
-					if (!empty($files)) {
-						echo "<h4>Soubory:</h4>";
-					}
-					foreach ($files as $file) {
-						echo "<a href='$basePath/files/$file->id.$file->suffix'>";
-						echo $file->name;
-						echo "</a>";
+					foreach ($messages->getAll() as $message) {
+						echo "<div class='message'>";
+						echo $message;
+						echo "</div>";
 					}
 					?>
-				</section>
+				</div>
+				<?php include $includeTemplate; ?>
+
 			</div>
 			<div class = "clear"></div>
 		</section>
+		<footer>
+			<?php
+			if ($user->isLoggedIn()) {
+				if ($user->isAdmin()) {
+					echo "<a href='$basePath/admin/'>Administrace</a>";
+				}
+				echo '<a href="?do=sign-out">Odhlášení</a>';
+			}
+			?>
+		</footer>
 	</body>
 </html>
 

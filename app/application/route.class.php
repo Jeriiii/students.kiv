@@ -16,6 +16,9 @@ class Route {
 	/** @var string Název stránky - plní se až při procházení rout v routeru */
 	private $pageName = null;
 
+	/** @var string Url cesta do dané template např. admin/new */
+	private $urlPath;
+
 	public function __construct($url, $controlerName) {
 		$this->url = $url;
 		$this->controlerName = $controlerName;
@@ -29,15 +32,21 @@ class Route {
 		return $this->controlerName;
 	}
 
-	public function setPageName($pageName) {
-		if ($pageName == "/") { //na homepage se stává, že se dá do názvu lomítko
-			$pageName = "";
+	public function setPageName($urlPath) {
+		if ($urlPath == "/") { //na homepage se stává, že se dá do názvu lomítko
+			$urlPath = "";
 		}
+		$this->urlPath = $urlPath;
+		$pageName = str_replace($this->url, "", "/" . $urlPath); //odstraní název controleru z názvu stránky
 		$this->pageName = $pageName;
 	}
 
 	public function getPageName() {
 		return $this->pageName;
+	}
+
+	public function getUrlPath() {
+		return $this->urlPath;
 	}
 
 }

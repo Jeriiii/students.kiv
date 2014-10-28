@@ -15,9 +15,15 @@ a:hover {
 	clear: both;
 }
 
-section.main {
+section.main, footer {
 	margin: 0 auto;
 	width: 900px;
+}
+
+footer {
+	margin-top: 50px;
+	text-align: right;
+	font-size: 10pt;
 }
 
 body {
@@ -53,6 +59,19 @@ header span {
 	padding-top: 10px;
 	display: inline-block;
 }
+#messages{
+	margin-left: 20px;
+	margin-top: 30px;
+}
+.message{
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #613318;
+	background-color: #fcf8e3;
+	border-color: #faebcc;
+}
 
 nav {
 	width: 160px;
@@ -84,7 +103,7 @@ nav a.selected {
 	width: 660px;
 }
 article {
-	padding: 25px 0 10px 20px;
+	padding: 5px 0 10px 20px;
 	font-size: 10pt;
 	font-family: Helvetica, Helvetica CE, Arial, Arial CE, sans-serif;
 	color: #1F1D1D;

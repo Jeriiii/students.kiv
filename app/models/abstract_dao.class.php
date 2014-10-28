@@ -33,10 +33,28 @@ class AbstractDao {
 		$values = array();
 		foreach ($data as $name => $val) {
 			$names[] = $name;
-			$values[] = mysql_real_escape_string($val); // ochrana proti SQL injection
+			$placeHolderValues[] = "?";
+			$values[] = $val;
 		}
-		$query = "INSERT INTO " . self::TABLE_NAME . " (" . implode(",", $names) . ")" . " VALUES(" . implode(",", $values) . ");";
-		$this->database->query($query);
+		$query = "INSERT INTO " . $this->getTableName() . " (" . implode(",", $names) . ")" . " VALUES(" . implode(",", $placeHolderValues) . ");";
+		$this->database->query($query, $values);
+	}
+
+	/**
+	 * Změní data v databázi.
+	 * @param int $id Id stránky.
+	 * @param array $data Data které se mají upravit.
+	 */
+	public function update($id, array $data) {
+		$names = array();
+		$values = array();
+		foreach ($data as $name => $val) {
+			$names[] = $name . '=' . "?";
+			$values[] = $val;
+		}
+		$values[] = $id;
+		$query = "UPDATE " . $this->getTableName() . " SET " . implode(",", $names) . " WHERE id = ?;";
+		$this->database->query($query, $values);
 	}
 
 	/**
@@ -50,6 +68,15 @@ class AbstractDao {
 			$arrStmts[] = $stmt;
 		}
 		return $arrStmts;
+	}
+
+	/**
+	 * Smaže řádek podle jeho id
+	 * @param int $id Id řádku.
+	 */
+	public function delete($id) {
+		$query = "DELETE FROM " . $this->getTableName() . " WHERE id = ?";
+		$this->database->query($query, $id);
 	}
 
 }

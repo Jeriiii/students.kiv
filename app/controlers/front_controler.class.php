@@ -33,12 +33,11 @@ class FrontControler extends BaseControler {
 				$this->redirect("FrontControler");
 			}
 		}
-		if (FALSE && $this->page->form) { // zatím to nebude fungovat, spustí se to až na serveru
-			if (!$this->isUserLoggedIn()) {
-				//TO DO přesměruje na přilašovací formulář
-			}
+		if ($this->page->form == PagesDao::TYPE_CONTACT && !$this->user->isLoggedIn()) { // zatím to nebude fungovat, spustí se to až na serveru
+			$this->messages->addMessage("Pro kontaktování supportu se nejdříve přihlašte.");
+			$this->redirect("FrontControler", "prihlaseni");
 		}
-		$this->pages = $pagesDao->getAll();
+		$this->pages = $pagesDao->getMenu();
 
 		$filesDao = $this->createFilesDao();
 		$this->files = $filesDao->getByPageId($this->page->id);
@@ -60,7 +59,18 @@ class FrontControler extends BaseControler {
 	 * Odchytí odeslání přihlašovacího formuláře.
 	 */
 	public function submitSigninForm() {
-		die("odchycení odeslání formuláře");
+		$userName = $this->postParam->login;
+		$password = $this->postParam->password;
+
+//		if (!pam_auth($userName, $password, $error)) {
+//			$this->messages->addMessage("Neplatné uživatelské jméno nebo heslo");
+//			$this->redirect("this");
+//		}
+
+		$this->signInUser($userName);
+
+		$this->messages->addMessage("Byl jste úspěšně přihlášen.");
+		$this->redirect("FrontControler");
 	}
 
 	/**

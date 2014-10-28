@@ -30,15 +30,19 @@ class Controler {
 	/** @var Messages Zprávy co se mají zobrazit příjemci */
 	public $messages;
 
-	public function __construct(Container $container, $templateName) {
+	/** @var User Aktuální uživatel */
+	public $user;
 
+	public function __construct(Container $container, $viewFolderName) {
+		$this->user = $container->user;
 		$this->messages = $container->messages;
 		$this->postParam = $container->postParam;
 		$this->query = $container->url->query;
 		$this->database = $container->database;
 		$this->router = $container->router;
 		$this->basePath = $container->url->basePath;
-		$this->template = new Template($templateName, $this->basePath, $this->messages);
+		$viewName = $this->router->getRoute()->getPageName();
+		$this->template = new Template($this->basePath, $this->user, $this->messages, $viewFolderName, $viewName);
 	}
 
 	/**
@@ -54,6 +58,7 @@ class Controler {
 		}
 
 		header("Location: " . $location);
+		die(); //okamžitě se ukončí vykonávání scriptu
 	}
 
 	/**
@@ -88,17 +93,36 @@ class Controler {
 	}
 
 	/**
+	 * Zkontroluje, zda je nastavený parametr DO
+	 */
+	public function checkDoParam() {
+		$this->checkSubmitForm();
+		$this->checkSignOut();
+	}
+
+	/**
 	 * Zkontroluje, zda byl odeslán formulář. Pokud ano, pokusí se zavolat obslužnou metodu.
 	 * @throws Exception Pokud metoda neexistuje, nahlásí chybu.
 	 */
-	public function checkSubmitForm() {
+	private function checkSubmitForm() {
 		if ($this->query->do == "submit-form") {
 			$submitFormMethod = "submit" . ucfirst($this->query->form);
 			if (method_exists($this, $submitFormMethod)) {
-				call_user_method($submitFormMethod, $this);
+				call_user_func(array($this, $submitFormMethod));
 			} else {
 				throw new Exception("Method $submitFormMethod not exist.");
 			}
+		}
+	}
+
+	/**
+	 * Odhlásí uživatele.
+	 */
+	private function checkSignOut() {
+		if ($this->query->do == "sign-out") {
+			$this->signOut();
+			$this->messages->addMessage("Byl jste úspěšně odhlášen");
+			$this->redirect("this");
 		}
 	}
 

@@ -3,6 +3,7 @@
 require_once APP_DIR . '/models/pages_dao.class.php';
 require_once APP_DIR . '/models/files_dao.class.php';
 require_once APP_DIR . '/models/links_dao.class.php';
+require_once APP_DIR . '/models/admins_dao.class.php';
 require_once APP_DIR . '/application/controler.class.php';
 
 /**
@@ -24,17 +25,29 @@ class BaseControler extends Controler {
 		return new LinksDao($this->database);
 	}
 
+	public function createAdminsDao() {
+		return new AdminsDao($this->database);
+	}
+
 	/**
-	 * Zjistí, zda je uživatel přihlášen.
+	 * Přihlásí uživatele do systému.
+	 * @param string $userName Jméno uživatele.
 	 */
-	public function isUserLoggedIn() {
-		if (!pam_auth($username, $password, $error)) {
-			if (!empty($error)) { // nepřihlášený uživatel
-				return FALSE;
-			}
+	public function signInUser($userName) {
+		$adminDao = $this->createAdminsDao();
+		$isAdmin = FALSE;
+		if ($adminDao->isAdmin($userName)) {
+			$isAdmin = TRUE;
 		}
 
-		return TRUE;
+		$this->user->signIn($userName, $isAdmin);
+	}
+
+	/**
+	 * Odhlášení uživatele.
+	 */
+	public function signOut() {
+		$this->user->signOut();
 	}
 
 }

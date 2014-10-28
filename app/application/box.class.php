@@ -8,7 +8,7 @@
 class Box {
 
 	/** @var array Proměnné templaty */
-	private $vars = array();
+	protected $vars = array();
 
 	/**
 	 * Obecný setter pro nastavení proměnných.
@@ -24,11 +24,11 @@ class Box {
 	 * @param string $name Název proměnné.
 	 */
 	public function __get($name) {
-		if (!array_key_exists($name, $this->vars)) {
-			return NULL;
+		if (array_key_exists($name, $this->vars)) {
+			return $this->vars[$name];
 		}
 
-		return $this->vars[$name];
+		return NULL;
 	}
 
 }

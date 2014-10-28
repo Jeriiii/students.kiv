@@ -5,7 +5,10 @@ require_once 'router.class.php';
 require_once 'database.class.php';
 require_once 'post_param.class.php';
 require_once 'messages.class.php';
+require_once 'session.class.php';
+require_once 'user.class.php';
 require_once APP_DIR . '/controlers/front_controler.class.php';
+require_once APP_DIR . '/controlers/admin_controler.class.php';
 
 /**
  * Stará se o spuštění celé aplikace.
@@ -34,11 +37,21 @@ class Application {
 		$templateName = lcfirst(str_replace("Controler", "", $controlName));
 
 		$controler = new $controlName($container, $templateName);
-		$controler->action($pageName);
 
-		$controler->checkSubmitForm();
-		die();
-		$controler->render($pageName);
+		$actionName = "action" . ucfirst($pageName);
+		if (!method_exists($controler, $actionName)) {
+			$actionName = "action";
+		}
+		$controler->$actionName($pageName);
+		$controler->checkDoParam($controler);
+
+		$renderName = "render" . ucfirst($pageName);
+		if (!method_exists($controler, $renderName)) {
+			$renderName = "render";
+		}
+		$controler->$renderName($pageName);
+		/* smaže vypsané zprávy */
+		$container->messages->clear();
 	}
 
 	/**
@@ -47,12 +60,14 @@ class Application {
 	private function init() {
 		$container = $this->container;
 
+		$container->session = $this->getSession($_SESSION);
 		$container->url = new Url($container->url);
 		$container->router = new Router($container->getRoutes(), $this->container->url);
-		$container->messages = new Messages();
+		$container->messages = new Messages($container->session);
 		$container->postParam = $this->getPostParam($_POST);
 		$container->route = $container->router->getRoute();
 		$container->database = new Database($container->connection);
+		$container->user = new User($container->session);
 	}
 
 	/**

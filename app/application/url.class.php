@@ -46,7 +46,6 @@ class Url {
 			if ($key != "q") { // vyhrazené pro path stránky
 				$this->query->$key = $param;
 			}
-			var_dump($param);
 		}
 	}
 
