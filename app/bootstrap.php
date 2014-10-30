@@ -12,7 +12,7 @@ $container = new Container();
 // načítání url
 $container->url = array_key_exists("q", $_GET) ? $_GET["q"] : "/";
 
-$connection = new Connection($driver, $host, $dbname, $user, $password);
+$connection = new Connection(DB_DRIVER, DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
 $container->connection = $connection;
 
 $container->addRoute(new Route("/admin/", "AdminControler"));
