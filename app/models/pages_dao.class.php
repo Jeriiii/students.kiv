@@ -9,7 +9,7 @@ require_once 'abstract_dao.class.php';
  */
 class PagesDao extends AbstractDao {
 
-	const TABLE_NAME = "pages";
+	const TABLE_NAME = "kukral_pages";
 
 	/* columns */
 	const COLUMN_ID = "id";

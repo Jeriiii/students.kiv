@@ -9,7 +9,7 @@ require_once 'abstract_dao.class.php';
  */
 class LinksDao extends AbstractDao {
 
-	const TABLE_NAME = "links";
+	const TABLE_NAME = "kukral_links";
 
 	/* columns */
 	const COLUMN_ID = "id";
