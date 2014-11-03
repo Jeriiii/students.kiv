@@ -5,11 +5,18 @@ define("DB_DRIVER", "mysql");
 define("DB_HOST", "localhost");
 define("DB_NAME", "students_kiv");
 define("DB_USER", "root");
-define("DB_PASSWORD", "a10b0618p");
+define("DB_PASSWORD", "root");
 
-//$driver = "mysql";
-//$host = "http://students.kiv.zcu.cz/";
-//$dbname = "db1_vyuka";
-//$user = "db1_vyuka";
-//$password = "db1_vyuka";
+//define("DB_DRIVER", "mysql");
+//define("DB_HOST", "students.kiv.zcu.cz");
+//define("DB_NAME", "db1_vyuka");
+//define("DB_USER", "db1_vyuka");
+//define("DB_PASSWORD", "db1_vyuka");
+
+//define("DB_DRIVER", "mysql");
+//define("DB_HOST", "wm54.wedos.net");
+//define("DB_NAME", "d67851_kivweb");
+//define("DB_USER", "a67851_kivweb");
+//define("DB_PASSWORD", "tfdQJNb7");
+
 

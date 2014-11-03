@@ -63,9 +63,11 @@
 			<?php
 			if ($user->isLoggedIn()) {
 				if ($user->isAdmin()) {
-					echo "<a href='$basePath/admin/'>Administrace</a>";
+					echo "<a href='$basePath/admin/'>Administrace</a> | ";
 				}
 				echo '<a href="?do=sign-out">Odhlášení</a>';
+			} else {
+				echo "<a href='$basePath/prihlaseni'>Přihlášení</a>";
 			}
 			?>
 		</footer>

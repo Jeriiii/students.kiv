@@ -63,8 +63,8 @@ class FrontControler extends BaseControler {
 		$password = $this->postParam->password;
 
 //		if (!pam_auth($userName, $password, $error)) {
-//			$this->messages->addMessage("Neplatné uživatelské jméno nebo heslo");
-//			$this->redirect("this");
+//		$this->messages->addMessage("Neplatné uživatelské jméno nebo heslo");
+//		$this->redirect("this");
 //		}
 
 		$this->signInUser($userName);

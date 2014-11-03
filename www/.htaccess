@@ -20,4 +20,5 @@ RewriteBase /
 # pokud dany adresar nebo soubor neexistuje, tak se provede presmerovani na index.php a do parametru q se vlozi pozadavek
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ /~kukral/www/index.php?q=$1 [L,QSA]
 RewriteRule ^(.*)$ /students.kiv/www/index.php?q=$1 [L,QSA]

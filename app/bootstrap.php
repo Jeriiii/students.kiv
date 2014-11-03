@@ -8,7 +8,6 @@ require_once APP_DIR . '/application/connection.class.php';
 require_once APP_DIR . '/config/config.php';
 
 $container = new Container();
-
 // načítání url
 $container->url = array_key_exists("q", $_GET) ? $_GET["q"] : "/";
 
