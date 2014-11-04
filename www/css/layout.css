@@ -21,9 +21,12 @@ section.main, footer {
 }
 
 footer {
+	border-top: 3px solid #FFB248;
 	margin-top: 50px;
-	text-align: right;
+	text-align: center;
 	font-size: 10pt;
+	color: #616161;
+	padding-top: 5px;
 }
 
 body {
@@ -58,6 +61,17 @@ header span {
 .logo-students {
 	padding-top: 10px;
 	display: inline-block;
+}
+.login-container {
+	float: right;
+	display: inline-block;
+}
+.login{
+	font-size: 10pt;
+	float: right;
+}
+a.login:visited{
+	color: white;
 }
 #messages{
 	margin-left: 20px;

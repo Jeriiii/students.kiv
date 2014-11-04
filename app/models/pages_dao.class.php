@@ -17,6 +17,7 @@ class PagesDao extends AbstractDao {
 	const COLUMN_URL = "url";
 	const COLUMN_FORM = "form";
 	const COLUMN_CONTENT = "content";
+	const COLUMN_IN_MENU = "in_menu";
 
 
 	/* typy */
@@ -32,7 +33,7 @@ class PagesDao extends AbstractDao {
 	 * @return array Pole s řádky.
 	 */
 	public function getMenu() {
-		$query = "SELECT * FROM " . self::TABLE_NAME . " WHERE " . self::COLUMN_FORM . " != ?";
+		$query = "SELECT * FROM " . self::TABLE_NAME . " WHERE " . self::COLUMN_FORM . " != ? AND " . self::COLUMN_IN_MENU . " = 1";
 		$stmt = $this->database->query($query, "2");
 		return $this->stmtsToArray($stmt);
 	}

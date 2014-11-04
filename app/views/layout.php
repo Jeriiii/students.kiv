@@ -21,6 +21,18 @@
 			<a class="logo-zcu" href="http://www.zcu.cz/" title="zcu">
 				<img src="img/layout/header_uwb_logo.png" alt="kiv" />
 			</a>
+			<span id="login-container">
+				<?php
+				if ($user->isLoggedIn()) {
+					if ($user->isAdmin()) {
+						echo "<a href='$basePath/admin/' class='login'>&nbsp;Administrace</a>";
+					}
+					echo "<a href='?do=sign-out' class='login'>Odhlášení</a>";
+				} else {
+					echo "<a href='$basePath/prihlaseni' class='login'>Přihlášení</a>";
+				}
+				?>
+			</span>
 		</header>
 		<section class="main">
 			<div class="left-side">
@@ -60,16 +72,7 @@
 			<div class = "clear"></div>
 		</section>
 		<footer>
-			<?php
-			if ($user->isLoggedIn()) {
-				if ($user->isAdmin()) {
-					echo "<a href='$basePath/admin/'>Administrace</a> | ";
-				}
-				echo '<a href="?do=sign-out">Odhlášení</a>';
-			} else {
-				echo "<a href='$basePath/prihlaseni'>Přihlášení</a>";
-			}
-			?>
+			2007 - 2014 Katedra informatiky a výpočetní techniky, Západočeská univerzita Plzeň
 		</footer>
 	</body>
 </html>
