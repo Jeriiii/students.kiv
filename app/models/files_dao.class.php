@@ -14,6 +14,7 @@ class FilesDao extends AbstractDao {
 	/* columns */
 	const COLUMN_ID = "id";
 	const COLUMN_NAME = "name";
+	const COLUMN_SUFFIX = "suffix";
 	const COLUMN_PAGE_ID = "page_id";
 
 	public function getTableName() {

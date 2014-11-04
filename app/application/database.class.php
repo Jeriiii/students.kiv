@@ -18,15 +18,19 @@ class Database {
 	 * Vykoná sql kód nad databází
 	 * @param string $sql SQL kód, co se má vykonat
 	 * @param array $params Parametry, které se mají vložit do sql kódu.
-	 * @return PDOStatement
+	 * @return PDOStatement|int Vybrané objekty | poslední vložené ID
 	 */
-	public function query($sql, $params = array()) {
+	public function query($sql, $params = array(), $getLastInsertId = FALSE) {
 		$params = is_string($params) ? array($params) : $params;
 		$connect = $this->createConnection();
 
 		/* vykonání příkazu i s ochranou proti SQL injection */
 		$stmt = $connect->prepare($sql);
 		$stmt->execute($params);
+
+		if ($getLastInsertId) {
+			$stmt = $connect->lastInsertId();
+		}
 
 		$connect = null; // ukončení spojení
 		return $stmt;

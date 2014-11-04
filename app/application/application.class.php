@@ -38,18 +38,24 @@ class Application {
 
 		$controler = new $controlName($container, $templateName);
 
+		$controler->startUp();
 		$actionName = "action" . ucfirst($pageName);
-		if (!method_exists($controler, $actionName)) {
-			$actionName = "action";
+
+		if (!method_exists($controler, $actionName) || $pageName == "") {
+
+			$controler->action($pageName); //action(jmeno strany)
+		} else {
+			$controler->$actionName(); //actionJmenoStranky
 		}
-		$controler->$actionName($pageName);
 		$controler->checkDoParam($controler);
 
 		$renderName = "render" . ucfirst($pageName);
-		if (!method_exists($controler, $renderName)) {
-			$renderName = "render";
+		if (!method_exists($controler, $renderName) || $pageName == "") {
+			$controler->render($pageName); //render(jmeno strany)
+		} else {
+			$controler->$renderName(); //renderJmenoStranky
 		}
-		$controler->$renderName($pageName);
+
 		/* smaže vypsané zprávy */
 		$container->messages->clear();
 	}

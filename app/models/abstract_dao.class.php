@@ -37,7 +37,8 @@ class AbstractDao {
 			$values[] = $val;
 		}
 		$query = "INSERT INTO " . $this->getTableName() . " (" . implode(",", $names) . ")" . " VALUES(" . implode(",", $placeHolderValues) . ");";
-		$this->database->query($query, $values);
+		$id = $this->database->query($query, $values, TRUE);
+		return $this->findById($id);
 	}
 
 	/**
@@ -77,6 +78,17 @@ class AbstractDao {
 	public function delete($id) {
 		$query = "DELETE FROM " . $this->getTableName() . " WHERE id = ?";
 		$this->database->query($query, $id);
+	}
+
+	/**
+	 * Najde řádek podle Id.
+	 * @param string $id Id řádku.
+	 * @return PDOStatement|boolean Jeden řádek.
+	 */
+	public function findById($id) {
+		$query = "SELECT * FROM " . $this->getTableName() . " WHERE id = ?";
+		$stmt = $this->database->query($query, $id);
+		return $stmt->fetch(PDO::FETCH_OBJ);
 	}
 
 }

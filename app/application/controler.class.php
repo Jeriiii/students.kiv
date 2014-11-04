@@ -46,6 +46,14 @@ class Controler {
 	}
 
 	/**
+	 * Metoda co se spouští jako první po vytvoření controlleru. Spouští se vždy pro controller,
+	 * proto je zde vhodné udělat třeba zabezpečení controlleru pro adminsitraci.
+	 */
+	public function startUp() {
+
+	}
+
+	/**
 	 * Přesměruje stránku na daný controller.
 	 * @param string $controlerName Název kontroleru, na který se má stránka přesměrovat.
 	 * @param string $pageName Název stránky, na kterou se má přesměrovat.

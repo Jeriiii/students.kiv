@@ -21,6 +21,16 @@ class AdminControler extends BaseControler {
 	/** @var array Odkazy na stránce */
 	private $links;
 
+	/** PDOStatement Aktuální odkaz.  */
+	private $link;
+
+	public function startUp() {
+		if (!$this->user->isAdmin()) {
+			$this->messages->addMessage("Na vstup do této sekce nemáte oprávnění");
+			$this->redirect("FrontControler");
+		}
+	}
+
 	public function action($pageName) {
 		$pagesDao = $this->createPagesDao();
 		$this->pages = $pagesDao->getAll();
@@ -32,7 +42,7 @@ class AdminControler extends BaseControler {
 		$this->template->render();
 	}
 
-	public function actionChangePage($pageName) {
+	public function actionChangePage() {
 		$pagesDao = $this->createPagesDao();
 		$this->page = $pagesDao->findById($this->query->id);
 		if (!$this->page) {
@@ -42,7 +52,7 @@ class AdminControler extends BaseControler {
 		}
 	}
 
-	public function renderChangePage($pageName) {
+	public function renderChangePage() {
 		$this->template->active = "pages";
 		$this->template->name = $this->page->name;
 		$this->template->content = $this->page->content;
@@ -50,23 +60,41 @@ class AdminControler extends BaseControler {
 		$this->template->render();
 	}
 
-	public function actionAdmins($pageName) {
+	public function actionChangeLink() {
+		$linkDao = $this->createLinksDao();
+		$this->link = $linkDao->findById($this->query->id);
+		if (!$this->link) {
+			/* stránka nebyla nalezena */
+			$this->messages->addMessage("Link který hledáte nebyl nalezen");
+			$this->redirect("AdminControler", "links");
+		}
+	}
+
+	public function renderChangeLink() {
+		$this->template->active = "links";
+		$this->template->name = $this->link->name;
+		$this->template->url = $this->link->url;
+		$this->template->linkId = $this->link->id;
+		$this->template->render();
+	}
+
+	public function actionAdmins() {
 		$adminsDao = $this->createAdminsDao();
 		$this->admins = $adminsDao->getAll();
 	}
 
-	public function renderAdmins($pageName) {
+	public function renderAdmins() {
 		$this->template->active = "admins";
 		$this->template->admins = $this->admins;
 		$this->template->render();
 	}
 
-	public function actionLinks($pageName) {
+	public function actionLinks() {
 		$linksDao = $this->createLinksDao();
 		$this->links = $linksDao->getAll();
 	}
 
-	public function renderLinks($pageName) {
+	public function renderLinks() {
 		$this->template->active = "links";
 		$this->template->links = $this->links;
 		$this->template->render();
@@ -110,7 +138,7 @@ class AdminControler extends BaseControler {
 	/**
 	 * Vloží nový odkaz
 	 */
-	public function submitLinkNewForm() {
+	public function submitNewLinkForm() {
 		$linksDao = $this->createLinksDao();
 		$this->validateLink();
 		$linksDao->insert(array(
@@ -118,6 +146,45 @@ class AdminControler extends BaseControler {
 			LinksDao::COLUMN_URL => $this->postParam->url
 		));
 		$this->messages->addMessage("Link byl vytvořen.");
+		$this->redirect("this");
+	}
+
+	/**
+	 * Upraví odkaz
+	 */
+	public function submitChangeLinkForm() {
+		$pageDao = $this->createLinksDao();
+		$this->validateLink();
+		$pageDao->update($this->query->id, array(
+			LinksDao::COLUMN_NAME => $this->postParam->name,
+			LinksDao::COLUMN_URL => $this->postParam->url
+		));
+		$this->messages->addMessage("Odkaz byl změněn.");
+		$this->redirect("this");
+	}
+
+	/**
+	 * Vloží nový soubor
+	 */
+	public function submitNewFileForm() {
+		$filesDao = $this->createFilesDao();
+		$this->validateFile();
+		$fileToUpload = $_FILES["fileToUpload"];
+
+		$targetDir = $this->basePath . "/files/";
+		$file = $filesDao->insert(array(
+			FilesDao::COLUMN_NAME => $this->postParam->name,
+			FilesDao::COLUMN_SUFFIX => pathinfo($fileToUpload["name"], PATHINFO_EXTENSION),
+			FilesDao::COLUMN_PAGE_ID => $this->postParam->pageId
+		));
+		$targetPath = $targetDir . $file->id . "." . $file->suffix;
+
+		if (move_uploaded_file($fileToUpload["tmp_name"], $targetPath)) {
+			$this->messages->addMessage("Soubor byl úspěšně nahrán.");
+		} else {
+			$filesDao->delete($file->id);
+			$this->messages->addMessage("Vyskytla se chyba při nahrávání souboru. Zkuste soubor nahrát znovu nebo kontaktuje správce.");
+		}
 		$this->redirect("this");
 	}
 
@@ -162,11 +229,31 @@ class AdminControler extends BaseControler {
 			$this->redirect("this");
 		}
 		if (strlen($name) > 30) {
-			$this->messages->addMessage("Náyev nesmí mít více než 30 znaků");
+			$this->messages->addMessage("Název nesmí mít více než 30 znaků");
 			$this->redirect("this");
 		}
 		if (strlen($url) > 200) {
 			$this->messages->addMessage("Url nesmí mít více než 200 znaků");
+			$this->redirect("this");
+		}
+	}
+
+	/**
+	 * Zkontroluje, zda má link všechny potřebné parametry
+	 */
+	private function validateFile() {
+		$name = $this->postParam->name;
+		$file = $_FILES["fileToUpload"];
+		if (empty($name)) {
+			$this->messages->addMessage("Vyplňte prosím název souboru");
+			$this->redirect("this");
+		}
+		if (strlen($name) > 30) {
+			$this->messages->addMessage("Název nesmí mít více než 30 znaků");
+			$this->redirect("this");
+		}
+		if (empty($file)) {
+			$this->messages->addMessage("Vložte soubor do formuláře");
 			$this->redirect("this");
 		}
 	}

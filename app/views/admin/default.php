@@ -16,7 +16,7 @@ include 'forms/pageForm.php';
 	foreach ($pages as $pg) {
 		echo "<tr>";
 		echo "<td>$pg->name</td>";
-		echo "<td><a href='$basePath/admin/changePage?id=$pg->id' class='btn btn-default'>Upravit</a></td>";
+		echo "<td><a href='$basePath/admin/changePage?id=$pg->id' class='btn btn-default'>Upravit/Přidat soubory</a></td>";
 		if ($pg->form == 0) {
 			echo "<td><a href='?do=delete-page&id=$pg->id' class='btn btn-danger'>Smazat</a></td>";
 		} else {

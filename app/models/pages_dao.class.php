@@ -49,17 +49,6 @@ class PagesDao extends AbstractDao {
 	}
 
 	/**
-	 * Najde stránku podle Id.
-	 * @param string $id Id stránky.
-	 * @return PDOStatement|boolean Jedna stránka.
-	 */
-	public function findById($id) {
-		$query = "SELECT * FROM " . self::TABLE_NAME . " WHERE " . self::COLUMN_ID . " = ?";
-		$stmt = $this->database->query($query, $id);
-		return $stmt->fetch(PDO::FETCH_OBJ);
-	}
-
-	/**
 	 * Najde stránku podle její url.
 	 * @param string $url Jméno url.
 	 * @return PDOStatement|boolean Jedna stránka.

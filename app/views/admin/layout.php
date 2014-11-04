@@ -42,6 +42,7 @@
 			<div class="row">
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
+						<?php if (empty($active)) $active = "" ?>
 						<li <?php if ($active == "pages") echo 'class="active"' ?>>
 							<a href="<?php echo $basePath ?>/admin/">Správa stránek</a>
 						</li>
@@ -69,5 +70,26 @@
 			</div>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- Place inside the <head> of your HTML -->
+		<script type="text/javascript" src="<?php echo $basePath ?>/js/tinymce/tinymce.min.js"></script>
+		<script type="text/javascript">
+			tinymce.init({
+				selector: "textarea",
+				theme: "modern",
+				height: 300,
+				plugins: [
+					"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+					"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+					"save table contextmenu directionality emoticons template paste textcolor"
+				],
+				content_css: "css/content.css",
+				toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons",
+				style_formats: [
+					{title: 'Nadpis 1', block: 'h1'},
+					{title: 'Nadpis 2', block: 'h2'},
+					{title: 'Nadpis 3', block: 'h3'}
+				]
+			});
+		</script>
 	</body>
 </html>
