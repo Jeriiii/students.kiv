@@ -1,7 +1,5 @@
 <?php
 
-require_once 'query.class.php';
-
 /**
  * Parsuje url
  *

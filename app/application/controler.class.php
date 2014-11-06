@@ -1,7 +1,5 @@
 <?php
 
-require_once APP_DIR . '/application/template.class.php';
-
 /**
  * Základní třída controler pro celou aplikaci
  *

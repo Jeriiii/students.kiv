@@ -1,7 +1,5 @@
 <?php
 
-require_once 'box.class.php';
-
 /**
  * Přepravka na post parametry.
  *

@@ -1,7 +1,5 @@
 <?php
 
-require_once 'abstract_dao.class.php';
-
 /**
  * Obstarává tabulku administrátory stránky
  *

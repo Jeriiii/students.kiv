@@ -1,11 +1,5 @@
 <?php
 
-require_once APP_DIR . '/models/pages_dao.class.php';
-require_once APP_DIR . '/models/files_dao.class.php';
-require_once APP_DIR . '/models/links_dao.class.php';
-require_once APP_DIR . '/models/admins_dao.class.php';
-require_once APP_DIR . '/application/controler.class.php';
-
 /**
  * Base controler pro všechny v aplikaci
  *

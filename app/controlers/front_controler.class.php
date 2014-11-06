@@ -1,7 +1,5 @@
 <?php
 
-require_once 'base_controler.class.php';
-
 /**
  * Controler, který se stará o veškeré požadavky na front-endu
  *

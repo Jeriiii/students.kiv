@@ -1,12 +1,5 @@
 <?php
 
-require_once 'url.class.php';
-require_once 'router.class.php';
-require_once 'database.class.php';
-require_once 'post_param.class.php';
-require_once 'messages.class.php';
-require_once 'session.class.php';
-require_once 'user.class.php';
 require_once APP_DIR . '/controlers/front_controler.class.php';
 require_once APP_DIR . '/controlers/admin_controler.class.php';
 

@@ -1,7 +1,5 @@
 <?php
 
-require_once 'box.class.php';
-
 /**
  * Slouží k přenášení hodnot mezi třídami
  *

@@ -1,7 +1,5 @@
 <?php
 
-require_once 'base_controler.class.php';
-
 /**
  * Controler, který se stará o práci v administraci
  *
