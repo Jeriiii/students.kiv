@@ -29,6 +29,7 @@ class User {
 	 */
 	public function signOut() {
 		$this->session->uname = null;
+		$this->session->isUserAdmin = null;
 	}
 
 	/**

@@ -20,13 +20,13 @@ if (empty($files)) {
 		foreach ($files as $file) {
 			echo "<tr>";
 			echo "<td><a href='$basePath/files/$file->id.$file->suffix'>$file->name</a></td>";
-			echo "<td><a href='$basePath/admin/changePage?id=$file->id' class='btn btn-default'>Upravit</a></td>";
+			echo "<td class='td-action'><a href='$basePath/admin/changePage?id=$file->id' class='btn btn-default'>Upravit</a> ";
 			if ($file->form == 0) {
-				echo "<td><a href='?do=delete-page&id=$file->id' class='btn btn-danger'>Smazat</a></td>";
+				echo " <a href='?do=delete-page&id=$file->id' class='btn btn-danger'>Smazat</a>";
 			} else {
-				echo "<td><div class='label label-default'>s formulářem</div></td>";
+				echo " <div class='label label-default'>s formulářem</div>";
 			}
-			echo "</tr>";
+			echo "</td></tr>";
 		}
 		?>
 	</tbody>

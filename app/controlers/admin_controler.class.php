@@ -23,7 +23,7 @@ class AdminControler extends BaseControler {
 	private $link;
 
 	public function startUp() {
-		if (!$this->user->isAdmin()) {
+		if (!$this->user->isLoggedIn() || !$this->user->isAdmin()) {
 			$this->messages->addMessage("Na vstup do této sekce nemáte oprávnění");
 			$this->redirect("FrontControler");
 		}
@@ -37,6 +37,15 @@ class AdminControler extends BaseControler {
 	public function render($pageName) {
 		$this->template->active = "pages";
 		$this->template->pages = $this->pages;
+		$this->template->render();
+	}
+
+	public function actionNewPage() {
+
+	}
+
+	public function renderNewPage() {
+		$this->template->active = "pages";
 		$this->template->render();
 	}
 

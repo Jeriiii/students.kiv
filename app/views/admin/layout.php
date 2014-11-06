@@ -28,11 +28,11 @@
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Administrace</a>
+					<a class="navbar-brand" href="<?php echo $basePath ?>">Domovská stránka</a>
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="?do=sing-out">Odhlášení</a></li>
+						<li><a href="<?php echo $basePath ?>/admin/?do=sign-out">Odhlášení</a></li>
 					</ul>
 				</div>
 			</div>

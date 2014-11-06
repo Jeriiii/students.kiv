@@ -103,3 +103,15 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+div.container-table {
+	max-width: 550px;
+}
+
+td.td-action {
+	width: 200px;
+}
+
+td.td-action-long {
+	width: 270px;
+}

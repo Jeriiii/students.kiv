@@ -11,31 +11,35 @@
 	</head>
 	<body>
 		<header>
-			<a class="logo-students" href="#" title="students.kiv">
-				<h1>< students.kiv ></h1>
-				<span>Informační portál pro studenty</span>
-			</a>
-			<a class="logo-kiv" href="http://www.kiv.zcu.cz/" title="kiv">
-				<img src="img/layout/header_kiv_logo.png" alt="kiv" />
-			</a>
-			<a class="logo-zcu" href="http://www.zcu.cz/" title="zcu">
-				<img src="img/layout/header_uwb_logo.png" alt="kiv" />
-			</a>
-			<span id="login-container">
-				<?php
-				if ($user->isLoggedIn()) {
-					if ($user->isAdmin()) {
-						echo "<a href='$basePath/admin/' class='login'>&nbsp;Administrace</a>";
+			<div>
+				<a class="logo-students" href="#" title="students.kiv">
+					<h1>< students.kiv ></h1>
+					<span>Informační portál pro studenty</span>
+				</a>
+				<a class="logo-kiv" href="http://www.kiv.zcu.cz/" title="kiv">
+					<img src="img/layout/header_kiv_logo.png" alt="kiv" />
+				</a>
+				<a class="logo-zcu" href="http://www.zcu.cz/" title="zcu">
+					<img src="img/layout/header_uwb_logo.png" alt="kiv" />
+				</a>
+				<span id="login-container">
+					<?php
+					if ($user->isLoggedIn()) {
+						echo "<a href='$basePath/?do=sign-out' class='login'>Odhlášení</a>";
+						if ($user->isAdmin()) {
+							echo "<a href='$basePath/admin/' class='login'>Administrace&nbsp;</a>";
+						}
+					} else {
+						echo "<a href='$basePath/prihlaseni' class='login'>Přihlášení</a>";
 					}
-					echo "<a href='?do=sign-out' class='login'>Odhlášení</a>";
-				} else {
-					echo "<a href='$basePath/prihlaseni' class='login'>Přihlášení</a>";
-				}
-				?>
-			</span>
+					?>
+				</span>
+			</div>
+			<div class="vertical-menu"></div>
 		</header>
 		<section class="main">
 			<div class="left-side">
+				<h4 class="menu">Menu</h4>
 				<nav>
 					<?php
 					foreach ($pages as $pg) {

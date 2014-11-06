@@ -44,4 +44,8 @@ class BaseControler extends Controler {
 		$this->user->signOut();
 	}
 
+	public function checkDoParam() {
+		parent::checkDoParam();
+	}
+
 }

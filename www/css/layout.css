@@ -66,6 +66,14 @@ header span {
 	float: right;
 	display: inline-block;
 }
+.vertical-menu {
+	margin-top: 9px;
+	margin-left: 20px;
+	color: white;
+}
+.vertical-menu a {
+	color: white;
+}
 .login{
 	font-size: 10pt;
 	float: right;
@@ -89,7 +97,7 @@ a.login:visited{
 
 nav {
 	width: 160px;
-	padding: 45px 10px 15px 30px;
+	padding: 0px 10px 15px 30px;
 }
 nav a {
 	display: block;
@@ -157,6 +165,10 @@ h4 {
 	color: #012E61;
 	margin-left: 15px;
 	margin-bottom: 10px;
+}
+
+h4.menu {
+	padding-top: 25px;
 }
 
 .files {
