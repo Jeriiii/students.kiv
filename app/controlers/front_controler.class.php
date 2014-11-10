@@ -50,6 +50,7 @@ class FrontControler extends BaseControler {
 		$this->template->page = $this->page;
 		$this->template->files = $this->files;
 		$this->template->tittle = "Web pro studenty";
+		$this->template->active = $this->page->url;
 		$this->template->render();
 	}
 
@@ -60,7 +61,7 @@ class FrontControler extends BaseControler {
 		$userName = $this->postParam->login;
 		$password = $this->postParam->password;
 
-//		if (!pam_auth($userName, $password, $error)) {
+//		if (!@pam_auth($userName, $password, $error)) {
 //		$this->messages->addMessage("Neplatné uživatelské jméno nebo heslo");
 //		$this->redirect("this");
 //		}

@@ -22,10 +22,10 @@
 				<a class="logo-zcu" href="http://www.zcu.cz/" title="zcu">
 					<img src="img/layout/header_uwb_logo.png" alt="kiv" />
 				</a>
-				<span id="login-container">
+				<div id="login-container">
 					<?php
 					if ($user->isLoggedIn()) {
-						echo "<a href='$basePath/?do=sign-out' class='login'>Odhlášení</a>";
+						echo "<a href='$basePath/?do=sign-out' class='login'>(Odhlášení)</a>";
 						if ($user->isAdmin()) {
 							echo "<a href='$basePath/admin/' class='login'>Administrace&nbsp;</a>";
 						}
@@ -33,7 +33,8 @@
 						echo "<a href='$basePath/prihlaseni' class='login'>Přihlášení</a>";
 					}
 					?>
-				</span>
+					<div class="clear"></div>
+				</div>
 			</div>
 			<div class="vertical-menu"></div>
 		</header>
@@ -43,7 +44,11 @@
 				<nav>
 					<?php
 					foreach ($pages as $pg) {
-						echo "<a href='$basePath/$pg->url'>";
+						echo "<a href='$basePath/$pg->url'";
+						if ($pg->name == $active) {
+							echo " class='selected' ";
+						}
+						echo ">";
 						echo $pg->name;
 						echo "</a>";
 					}

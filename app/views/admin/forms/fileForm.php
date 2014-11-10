@@ -10,5 +10,5 @@
 		</div>
 	<?php } ?>
 	<input type="hidden" name="pageId" value="<?php echo $pageId ?>">
-	<input name="send" type="submit" value="Odeslat" class="btn btn-primary" />
+	<input name="send" type="submit" value="Uložit" class="btn btn-primary" />
 </form>

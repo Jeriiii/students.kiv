@@ -7,5 +7,5 @@
 		<label>Url</label>
 		<input name="url" type="text" class="form-control" placeholder="Odkaz" required="" value="<?php if (isset($url)) echo $url; ?>">
 	</div>
-	<input name="send" type="submit" value="Odeslat" class="btn btn-primary" />
+	<input name="send" type="submit" value="Uložit" class="btn btn-primary" />
 </form>

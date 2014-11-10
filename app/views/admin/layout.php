@@ -72,6 +72,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<!-- Place inside the <head> of your HTML -->
 		<script type="text/javascript" src="<?php echo $basePath ?>/js/tinymce/tinymce.min.js"></script>
+		<script type="text/javascript" src="<?php echo $basePath ?>/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			tinymce.init({
 				selector: "textarea",

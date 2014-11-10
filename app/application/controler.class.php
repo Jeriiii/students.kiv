@@ -17,7 +17,7 @@ class Controler {
 	protected $basePath;
 
 	/** @var Router Routování adres */
-	private $router;
+	protected $router;
 
 	/** @var Query Parametry předané v adrese */
 	public $query;

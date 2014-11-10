@@ -115,3 +115,7 @@ td.td-action {
 td.td-action-long {
 	width: 270px;
 }
+
+table a.btn {
+	margin-right: 5px !important;
+}

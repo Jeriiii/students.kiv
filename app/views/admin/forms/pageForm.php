@@ -7,6 +7,6 @@
 		<label>Text stránky</label>
 		<textarea class="form-control" name="content" placeholder="Text stránky" rows="4" cols="50"><?php if (isset($content)) echo $content; ?></textarea>
 	</div>
-	<input name="send" type="submit" value="Odeslat" class="btn btn-primary" />
+	<input name="send" type="submit" value="Uložit" class="btn btn-primary" />
 </form>
 
