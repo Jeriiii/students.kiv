@@ -123,3 +123,7 @@ table a.btn {
 .modal-dialog {
 	z-index: 1000000;
 }
+
+td.td-action-short {
+	width: 120px;
+}

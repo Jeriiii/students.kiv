@@ -12,7 +12,7 @@
 			foreach ($admins as $admin) {
 				echo "<tr>";
 				echo "<td>$admin->name</td>";
-				echo "<td>";
+				echo "<td class='td-action-short'>";
 				$id = $admin->id;
 				$name = $admin->name;
 				$tittle = "Smazat administrátora";
