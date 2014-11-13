@@ -64,6 +64,9 @@ class AdminControler extends BaseControler {
 		$this->template->name = $this->page->name;
 		$this->template->content = $this->page->content;
 		$this->template->pageId = $this->page->id;
+		$fileDao = $this->createFilesDao();
+		$files = $fileDao->getByPageId($this->page->id);
+		$this->template->files = $files;
 		$this->template->render();
 	}
 
@@ -126,7 +129,7 @@ class AdminControler extends BaseControler {
 		$this->validatePage();
 		$pageDao->updatePage($this->query->id, $this->postParam->name, $this->postParam->content);
 		$this->messages->addMessage("Stránka byla změněna.");
-		$this->redirect("this");
+		$this->redirect("AdminControler", "changePage", array("id" => $this->query->id));
 	}
 
 	/**
@@ -273,6 +276,7 @@ class AdminControler extends BaseControler {
 		$this->checkDeletePage();
 		$this->checkDeleteAdmin();
 		$this->checkDeleteLink();
+		$this->checkDeleteFile();
 	}
 
 	/**
@@ -311,6 +315,27 @@ class AdminControler extends BaseControler {
 			$linksDao->delete($this->query->id);
 			$this->messages->addMessage("Link byl smazán");
 			$this->redirect("this");
+		}
+	}
+
+	/**
+	 * Pokud bylo zmáčknuto tlačítko na smazání stránky, smaže ji.
+	 */
+	private function checkDeleteFile() {
+		if ($this->query->do == "delete-file") {
+			/* smaže soubor */
+			$fileDao = $this->createFilesDao();
+
+			$file = $fileDao->findById($this->query->id);
+			$filePath = "$this->basePath/files/$file->id.$file->suffix";
+
+			if (file_exists($filePath)) {
+				unlink($filePath);
+			}
+			$fileDao->delete($this->query->id);
+
+			$this->messages->addMessage("Soubor byl smazán");
+			$this->redirect("AdminControler", "changePage", array("id" => $file->page_id));
 		}
 	}
 

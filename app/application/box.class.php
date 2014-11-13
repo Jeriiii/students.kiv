@@ -31,4 +31,12 @@ class Box {
 		return NULL;
 	}
 
+	/**
+	 * Vrátí všechny proměnné jako pole.
+	 * @return array Pole s hodnotami
+	 */
+	public function getVariables() {
+		return $this->vars;
+	}
+
 }

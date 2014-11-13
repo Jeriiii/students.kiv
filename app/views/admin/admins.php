@@ -12,7 +12,14 @@
 			foreach ($admins as $admin) {
 				echo "<tr>";
 				echo "<td>$admin->name</td>";
-				echo "<td class='td-action'><a href='?do=delete-admin&id=$admin->id' class='btn btn-danger'>Smazat</a></td>";
+				echo "<td>";
+				$id = $admin->id;
+				$name = $admin->name;
+				$tittle = "Smazat administrátora";
+				$message = "Opravdu chcete smazat administráotra?";
+				$link = "?do=delete-admin&id=$admin->id";
+				include 'modals/bootstrapModal.php';
+				echo "</td>";
 				echo "</tr>";
 			}
 			?>

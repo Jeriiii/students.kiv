@@ -12,6 +12,7 @@
 
 		<!-- Bootstrap core CSS -->
 		<link href="<?php echo $basePath ?>/css/bootstrap.min.css" rel="stylesheet">
+		<link href="<?php echo $basePath ?>/css/bootstrap-theme.min.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="<?php echo $basePath ?>/css/dashboard.css" rel="stylesheet">

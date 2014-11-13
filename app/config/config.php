@@ -5,7 +5,7 @@ define("DB_DRIVER", "mysql");
 define("DB_HOST", "localhost");
 define("DB_NAME", "students_kiv");
 define("DB_USER", "root");
-define("DB_PASSWORD", "a10b0618p");
+define("DB_PASSWORD", "root");
 
 
 //define("DB_DRIVER", "mysql");

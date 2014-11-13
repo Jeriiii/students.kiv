@@ -11,7 +11,13 @@
 			foreach ($links as $link) {
 				echo "<tr>";
 				echo "<td>$link->name</td>";
-				echo "<td class='td-action'><a href='$basePath/admin/changeLink?id=$link->id' class='btn btn-default'>Upravit</a> <a href='?do=delete-link&id=$link->id' class='btn btn-danger'>Smazat</a></td>";
+				echo "<td class='td-action'><a href='$basePath/admin/changeLink?id=$link->id' class='btn btn-default'>Upravit</a> ";
+				$id = $link->id;
+				$name = $link->name;
+				$tittle = "Smazat odkaz";
+				$message = "Opravdu chcete smazat odkaz?";
+				$link = "?do=delete-link&id=$link->id";
+				include 'modals/bootstrapModal.php';
 				echo "</tr>";
 			}
 			?>

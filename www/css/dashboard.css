@@ -119,3 +119,7 @@ td.td-action-long {
 table a.btn {
 	margin-right: 5px !important;
 }
+
+.modal-dialog {
+	z-index: 1000000;
+}

@@ -55,12 +55,23 @@ class Controler {
 	 * Přesměruje stránku na daný controller.
 	 * @param string $controlerName Název kontroleru, na který se má stránka přesměrovat.
 	 * @param string $pageName Název stránky, na kterou se má přesměrovat.
+	 * @param array $queries Proměnné v url
 	 */
-	protected function redirect($controlerName, $pageName = "") {
+	protected function redirect($controlerName, $pageName = "", $queries = array()) {
 		if ($controlerName == "this") {
 			$location = $this->getThisLocation();
 		} else {
 			$location = $this->getLocation($controlerName, $pageName);
+		}
+
+		/* přidá queries */
+		if (!empty($queries)) {
+			$urlQuery;
+			foreach ($queries as $name => $value) {
+				$urlQuery[] = "$name=$value";
+			}
+			$urlQuery = implode("&", $urlQuery);
+			$location = $location . "?" . $urlQuery;
 		}
 
 		header("Location: " . $location);
@@ -77,6 +88,16 @@ class Controler {
 		$pageName = $currentRoute->getPageName();
 
 		$location = $this->basePath . $baseUrl . $pageName;
+
+		$queries = $this->query->getVariables();
+		if (!empty($queries)) {
+			$urlQuery;
+			foreach ($queries as $name => $value) {
+				$urlQuery[] = "$name=$value";
+			}
+			$urlQuery = implode("&", $urlQuery);
+			$location = $location . "?" . $urlQuery;
+		}
 
 		return $location;
 	}

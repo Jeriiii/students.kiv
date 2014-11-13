@@ -21,29 +21,12 @@ if (empty($files)) {
 			echo "<tr>";
 			echo "<td><a href='$basePath/files/$file->id.$file->suffix'>$file->name</a></td>";
 			echo "<td class='td-action'><a href='$basePath/admin/changePage?id=$file->id' class='btn btn-default'>Upravit</a> ";
-			if ($file->form == 0) {
-				echo "
-					<button type='button' class='btn btn-danger' data-toggle='modal-$pg->id' data-target='#myModal'>					  Smazat
-					</button>
-					<div class='modal modal-$pg->id fade'>
-						<div class='modal-dialog'>
-						  <div class='modal-content'>
-							<div class='modal-header'>
-							  <h4 class='modal-title'>Smazat soubor</h4>
-							</div>
-							<div class='modal-body'>
-							  <p>Opravdu chcete smazat soubor $file->name</p>
-							</div>
-							<div class='modal-footer'>
-							  <a href='?do=delete-page&id=$file->id' type='button' class='btn btn-danger'>Smazat</a>
-							  <button type='button' class='btn btn-default' data-dismiss='modal'>Zavřít</button>
-							</div>
-						  </div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-					  </div><!-- /.modal -->";
-			} else {
-				echo " <div class='label label-default'>s formulářem</div>";
-			}
+			$id = $file->id;
+			$name = $file->name;
+			$tittle = "Smazat soubor";
+			$message = "Opravdu chcete smazat soubor?";
+			$link = "?do=delete-file&id=$file->id";
+			include 'modals/bootstrapModal.php';
 			echo "</td></tr>";
 		}
 		?>
