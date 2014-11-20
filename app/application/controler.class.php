@@ -149,7 +149,7 @@ class Controler {
 		if ($this->query->do == "sign-out") {
 			$this->signOut();
 			$this->messages->addMessage("Byl jste úspěšně odhlášen");
-			$this->redirect("this");
+			$this->redirect("FrontControler");
 		}
 	}
 
