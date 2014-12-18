@@ -1,5 +1,7 @@
 <?php
 
+define("EMAIL_RECIPIENT", "to@email.com");
+
 /* nastavení databáze */
 define("DB_DRIVER", "mysql");
 define("DB_HOST", "localhost");
@@ -13,11 +15,5 @@ define("DB_PASSWORD", "root");
 //define("DB_NAME", "db1_vyuka");
 //define("DB_USER", "db1_vyuka");
 //define("DB_PASSWORD", "db1_vyuka");
-
-//define("DB_DRIVER", "mysql");
-//define("DB_HOST", "wm54.wedos.net");
-//define("DB_NAME", "d67851_kivweb");
-//define("DB_USER", "a67851_kivweb");
-//define("DB_PASSWORD", "tfdQJNb7");
 
 

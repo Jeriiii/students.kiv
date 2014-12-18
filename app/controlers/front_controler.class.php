@@ -77,8 +77,8 @@ class FrontControler extends BaseControler {
 	 */
 	public function submitContactForm() {
 		if ($this->postParam->note) {
-			$to = "to@email.com";
-			$from = "from@email.com";
+			$to = EMAIL_RECIPIENT;
+			$from = "from@email.com"; // změnit na přihlášeného uživatele, který se přihlásí přes pam_auth
 			$this->sendMail($this->postParam->note, $to, $from);
 			$this->messages->addMessage("Formulář byl úspěšně odeslán.");
 		} else {
